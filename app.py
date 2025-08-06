@@ -2,12 +2,10 @@ import requests
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # Necesario para usar flash messages
+app.secret_key = 'supersecretkey'  
 
-# Lista para almacenar mensajes de contacto
 contact_messages = []
 
-# Reemplaza 'YOUR_API_KEY' con tu clave de API de OpenWeatherMap
 API_KEY = 'c5065d56d8b04794c2ea510d959b0d3e'
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
@@ -29,7 +27,6 @@ def contacto():
         if not all([name, email, message]):
             flash('Por favor completa todos los campos', 'danger')
         else:
-            # Guardar el mensaje en la lista
             contact_messages.append({'name': name, 'email': email, 'message': message})
             flash('Mensaje enviado con éxito!', 'success')
             return redirect(url_for('contacto'))
